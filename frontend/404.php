@@ -13,7 +13,7 @@
 <body>
   <div class="div_index">
     <header>
-      <h1>Eror 404</h2>
+      <h1>Eror 404</h1>
     </header>
     <b>Perdon, no pudimos encontrar la página :C</b>
     <main class="main_index">
