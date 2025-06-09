@@ -120,9 +120,32 @@ body {
     border-color: #8b8b8b;
 }
 
-.tabla {
+.barra_busqueda{
+    display: inline-block;
+    margin: 10px 0;
+    padding: 10px;
+    width: 30%;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: #8b8b8b;
+}
+
+.boton_busqueda{
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.boton_busqueda:hover{
+    background-color: rgb(212, 212, 212);
+}
+
+.contenedor_tabla{
+    width: 100%;
     margin-right: 10px ;
     margin-left: 20px ;
+}
+
+.tabla {
     background-color: white;
     width: 100%;
     border-radius: 5px;

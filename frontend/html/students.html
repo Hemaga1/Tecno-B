@@ -50,20 +50,34 @@
 
     </div>
 
-    <table class="tabla">
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Email</th>
-          <th>Edad</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody id="studentTableBody"></tbody>
-    </table>
+    <div class="contenedor_tabla">
+
+      <form id="searchForm">
+        <input type="search" class="barra_busqueda" id="nombre_busqueda" placeholder="Búsqueda">
+        <button id="searchBtn" class="boton_busqueda">Buscar</button>
+
+      </form>
+
+      <table class="tabla">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Edad</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="studentTableBody"></tbody>
+      </table>
+    </div>
+
   </div>
 
   
   
 </body>
+
+
 </html>
+
+

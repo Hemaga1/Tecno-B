@@ -1,8 +1,16 @@
-/*frontend/js/controllers/studentsSubjectsController.js*/
+/**
+*    File        : frontend/js/controllers/studentsSubjectsController.js
+*    Project     : CRUD PHP
+*    Author      : Tecnologías Informáticas B - Facultad de Ingeniería - UNMdP
+*    License     : http://www.gnu.org/licenses/gpl.txt  GNU GPL 3.0
+*    Date        : Mayo 2025
+*    Status      : Prototype
+*    Iteration   : 3.0 ( prototype )
+*/
+
 import { studentsAPI } from '../api/studentsAPI.js';
 import { subjectsAPI } from '../api/subjectsAPI.js';
 import { studentsSubjectsAPI } from '../api/studentsSubjectsAPI.js';
-
 
 document.addEventListener('DOMContentLoaded', () => 
 {
@@ -139,9 +147,7 @@ function renderRelationsTable(relations)
     {
         const tr = document.createElement('tr');
 
-        // tr.appendChild(createCell(rel.fullname || rel.student_id));old
         tr.appendChild(createCell(rel.student_fullname));
-        // tr.appendChild(createCell(rel.name || rel.subject_id));old
         tr.appendChild(createCell(rel.subject_name));
         tr.appendChild(createCell(rel.approved ? 'Sí' : 'No'));
         tr.appendChild(createActionsCell(rel));

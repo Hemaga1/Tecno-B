@@ -1,4 +1,13 @@
-/*frontend/js/api/apiFactory.js*/
+/**
+*    File        : frontend/js/api/apiFactory.js
+*    Project     : CRUD PHP
+*    Author      : Tecnologías Informáticas B - Facultad de Ingeniería - UNMdP
+*    License     : http://www.gnu.org/licenses/gpl.txt  GNU GPL 3.0
+*    Date        : Mayo 2025
+*    Status      : Prototype
+*    Iteration   : 3.0 ( prototype )
+*/
+
 export function createAPI(moduleName, config = {}) 
 {
     const API_URL = config.urlOverride ?? `../../backend/server.php?module=${moduleName}`;
@@ -14,7 +23,7 @@ export function createAPI(moduleName, config = {})
 
         if (!res.ok) throw new Error(`Error en ${method}`);
         return await res.json();
-    }
+    } 
 
     return {
         async fetchAll()
@@ -22,6 +31,10 @@ export function createAPI(moduleName, config = {})
             const res = await fetch(API_URL);
             if (!res.ok) throw new Error("No se pudieron obtener los datos");
             return await res.json();
+        },
+        async searchData(data)
+        {
+            return await sendJSON('POST', data);
         },
         async create(data)
         {

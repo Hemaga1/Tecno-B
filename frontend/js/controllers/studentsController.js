@@ -1,4 +1,13 @@
-/*frontend/js/controllers/studentsController.js*/
+/**
+*    File        : frontend/js/controllers/studentsController.js
+*    Project     : CRUD PHP
+*    Author      : Tecnologías Informáticas B - Facultad de Ingeniería - UNMdP
+*    License     : http://www.gnu.org/licenses/gpl.txt  GNU GPL 3.0
+*    Date        : Mayo 2025
+*    Status      : Prototype
+*    Iteration   : 3.0 ( prototype )
+*/
+
 import { studentsAPI } from '../api/studentsAPI.js';
 
 document.addEventListener('DOMContentLoaded', () => 
@@ -6,14 +15,17 @@ document.addEventListener('DOMContentLoaded', () =>
     loadStudents();
     setupFormHandler();
     setupCancelHandler();
+    setupSearchHandler();
 });
   
 function setupFormHandler()
 {
-    const form = document.getElementById('studentForm');
+    const form = document.getElementById('studentForm'); //Se busca el formulario con el id="studentForm" desde el HTML
     form.addEventListener('submit', async e => 
     {
         e.preventDefault();
+
+
         const student = getFormData();
     
         try 
@@ -45,6 +57,17 @@ function setupCancelHandler()
     });
 }
   
+function setupSearchHandler()
+{
+    const formSearch = document.getElementById('searchBtn');
+    formSearch.addEventListener('click', async e => 
+    {
+        e.preventDefault(); 
+
+        loadStudentsSearch();
+    });
+}
+
 function getFormData()
 {
     return {
@@ -52,6 +75,13 @@ function getFormData()
         fullname: document.getElementById('fullname').value.trim(),
         email: document.getElementById('email').value.trim(),
         age: parseInt(document.getElementById('age').value.trim(), 10)
+    };
+}
+
+function getSearchData()
+{
+    return {
+        searchName: document.getElementById('nombre_busqueda').value.trim()
     };
 }
   
@@ -72,6 +102,23 @@ async function loadStudents()
     {
         console.error('Error cargando estudiantes:', err.message);
     }
+}
+
+async function loadStudentsSearch()
+{
+    const searchStudents = getSearchData();
+    if(searchStudents.searchName){
+        try 
+        {
+            const students = await studentsAPI.searchData(searchStudents);
+            renderStudentTable(students);
+        } 
+        catch (err) 
+        {
+            console.error('Error cargando estudiantes:', err.message);
+        }
+    }
+    else loadStudents();
 }
   
 function renderStudentTable(students)
