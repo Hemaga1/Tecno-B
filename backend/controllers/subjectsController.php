@@ -31,16 +31,20 @@ function handlePost($conn)
 {
     $input = json_decode(file_get_contents("php://input"), true);
 
-    $result = createSubject($conn, $input['name']);
-    if ($result['inserted'] > 0) 
-    {
-        echo json_encode(["message" => "Materia creada correctamente"]);
-    } 
-    else 
-    {
-        http_response_code(500);
-        echo json_encode(["error" => "No se pudo crear"]);
+    $busco = getSubjectByName($conn, $input['name']);
+    if(!$busco){
+        $result = createSubject($conn, $input['name']);
+        if ($result['inserted'] > 0) 
+        {
+            echo json_encode(["message" => "Materia creada correctamente"]);
+        } 
+        else 
+        {
+            http_response_code(500);
+            echo json_encode(["error" => "No se pudo crear"]);
+        }
     }
+    else echo json_encode($busco);
 }
 
 function handlePut($conn) 

@@ -20,6 +20,9 @@ document.addEventListener('DOMContentLoaded', () =>
 function setupSubjectFormHandler() 
 {
   const form = document.getElementById('subjectForm');
+
+  var aviso = 0;
+
   form.addEventListener('submit', async e => 
   {
         e.preventDefault();
@@ -29,15 +32,37 @@ function setupSubjectFormHandler()
             name: document.getElementById('name').value.trim()
         };
 
+        const subjectForm = document.getElementById('form_materia');
+
         try 
         {
             if (subject.id) 
             {
                 await subjectsAPI.update(subject);
+                if(aviso){
+                        aviso=0;
+                        subjectForm.removeChild(subjectForm.lastChild);
+                    }
             }
             else
             {
-                await subjectsAPI.create(subject);
+                const materia = await subjectsAPI.create(subject);
+
+                if(materia.id){
+                    if(!aviso){
+                        aviso=1;
+                        const p = document.createElement('p');
+                        const texto = document.createTextNode("Ya existe esa materia, ingrese otro nombre.");
+                        subjectForm.appendChild(p.appendChild(texto));
+                    }
+                }
+                else{
+                    if(aviso){
+                        aviso=0;
+                        subjectForm.removeChild(subjectForm.lastChild);
+                    }
+                }
+
             }
             
             form.reset();
